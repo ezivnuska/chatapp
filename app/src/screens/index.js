@@ -1,4 +1,4 @@
-import HomeScreen from './HomeScreen'
+// import HomeScreen from './HomeScreen'
 // import MapScreen from './MapScreen'
 import SigninScreen from './SigninScreen'
 import SignupScreen from './SignupScreen'
@@ -29,14 +29,18 @@ import SecureScreen from './SecureScreen'
 // import VendorDetailsScreen from './VendorDetailsScreen'
 // import SendPWEmailScreen from './SendPWEmailScreen'
 // import ResetPWScreen from './ResetPWScreen'
+import UserListScreen from './UserListScreen'
+import UserDetailsScreen from './UserDetailsScreen'
 
 export {
     AuthLoadingScreen,
-    HomeScreen,
+    // HomeScreen,
     DashboardScreen,
     // MapScreen,
     SigninScreen,
     SignupScreen,
+    UserListScreen,
+    UserDetailsScreen,
     // WelcomeScreen,
     // FluffyScreen,
     // AquariumScreen,

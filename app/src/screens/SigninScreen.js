@@ -20,42 +20,6 @@ const SignInScreen = props => {
 
   const navigateToSignup = () => props.navigation.navigate('Signup')
   const navigateToSendEmail = () => props.navigation.navigate('SendEmail')
-  
-  // signIn = (e) => {
-  //   e.preventDefault();
-
-  //   if (!this.state.email || !this.state.password) {
-  //     alert('Email and password are required');
-  //     return;
-  //   }
-
-  //   const user = {
-  //     email: this.state.email,
-  //     password: this.state.password,
-  //   };
-
-  //   axios
-  //     .post('http://192.168.1.66:5000/signin', user)
-  //     .then(result => {
-  //         if (result.data.success) {
-  //           const user = Object.assign({}, result.data.user);
-            
-  //           AsyncStorage
-  //               .setItem('userToken', user._id)
-  //               .then(res => {
-  //                   globalStore.updateUser(user);
-  //                   this.props.navigation.navigate('App');
-  //               })
-  //               .catch(err => alert('Signin Error!'));
-  //         } else {
-  //           alert('Error happens when try to sign you in! Please check email and password!');
-  //         }    
-  //     })
-  //     .catch(err => {
-  //       alert('Failed to sign you in! If you do not have an account, sign up first!');
-  //       console.log(err);
-  //     });
-  // }
 
   const { control, handleSubmit, formState: { errors } } = useForm()
 
@@ -83,7 +47,7 @@ const SignInScreen = props => {
             .then(action(() => {
               console.log('userToken saved in local storage')
               globalStore.updateUser(user)
-              props.navigation.navigate('App', { routeName: 'Home' })
+              props.navigation.navigate('App')
             }))
             .catch(err => alert('Signin Error!'))
 
@@ -127,7 +91,7 @@ const SignInScreen = props => {
               />
             )}
             name='email'
-            defaultValue=''
+            defaultValue='ezivnuska@gmail.com'
           />
           <Text>Password</Text>
           <Controller
@@ -147,7 +111,7 @@ const SignInScreen = props => {
               />
             )}
             name='password'
-            defaultValue=''
+            defaultValue='ezivnuska'
           />
           <TouchableOpacity
             style={styles.button}

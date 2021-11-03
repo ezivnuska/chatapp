@@ -2,29 +2,45 @@ import {
     observable,
     makeObservable,
     action,
-    computed
+    computed,
+    decorate,
 } from 'mobx'
 
 class GlobalStore {
 
     // User
     users = []
-    user = {
-        _id: '',
-        email: '',
-        username: '',
-        // thumbnail: '',
-    }
-    
-    updateUser = updated => this.user = updated
-    updateAddress = address => this.user.address = Object.assign({}, address);
+    user = null
+    userDetails = null
 
-    constructor(user){
+    updateUser = updated => {
+        this.user = updated
+        console.log('user updated:', this.user.username)
+    }
+
+    updateUsers = updated => {
+        this.users = updated
+        console.log('users updated')
+    }
+
+    setUserDetails = user => {
+        console.log('user details set', user.username)
+        this.userDetails = user
+    }
+
+
+
+    // updateAddress = address => this.user.address = Object.assign({}, address);
+
+    constructor(){
         makeObservable(this, {
             user: observable,
             updateUser: action,
+            users: observable,
+            updateUsers: action,
+            userDetails: observable,
+            setUserDetails: action,
         })
-        this.user = user
     }
 
     // 'Orders'

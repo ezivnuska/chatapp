@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { 
     View,  
     StyleSheet, 
@@ -13,17 +13,16 @@ import axios from 'axios'
 const loadApp = async props => {
     const userToken = await AsyncStorage.getItem('userToken')
     if (userToken) {
-        console.log('Token found in AsyncStorage. Authenticating user', userToken)
+        console.log('Token found in AsyncStorage. Authenticating user.')
         axios
             .post('http://localhost:3000/authenticate', { userToken })
             .then(action(({ data }) => {
-                console.log('Authenticated user result:', data)
+                // console.log('Authenticated user result:', data)
                 const { user } = data
-                console.log('user...', user)
                 if (!user) throw new Error('Error: coulld not authenticate user', data)
                 const { _id, email, username } = user
                 const authenticatedUser = { _id, email, username }
-                console.log('Authenticated user:', authenticatedUser)
+                console.log('Authenticated user:', authenticatedUser.username)
                 globalStore.updateUser(authenticatedUser)
                 props.navigation.navigate('App')
             }))
@@ -32,7 +31,7 @@ const loadApp = async props => {
                 props.navigation.navigate('Auth')
             })
     } else {
-        console.log('navigting to Auth')
+        console.log('No userToken found in local storage. Navigting to Auth.')
         props.navigation.navigate('Auth')
     }
 }

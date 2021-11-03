@@ -19,7 +19,7 @@ const SecureScreen = Component => props => {
     const isMounted = useIsMounted()
 
     const authenticate = async () => {
-        console.log('authenticating...')
+        console.log('authenticating...', props)
         setState({
             ...state,
             authenticating: true,
@@ -42,10 +42,11 @@ const SecureScreen = Component => props => {
                 }))
                 .catch(err => {
                     console.log('Error getting user', err)
-                    navigation.navigate('Auth')
+                    console.log('props...', props)
+                    props.navigation.navigate('Auth')
                 })
         }
-        else navigation.navigate('Auth')
+        else props.navigation.navigate('Auth')
     }
     
     if (!state.authenticated && !state.authenticating) authenticate()

@@ -20,6 +20,8 @@
 // import OrderItems from './OrderItems'
 // import OrderLocationForm from './OrderLocationForm'
 import ScreenContent from './ScreenContent'
+import UserDetails from './UserDetails'
+import UserList from './UserList'
 // import SubNav from './SubNav'
 
 export {
@@ -45,5 +47,7 @@ export {
     // OrderItems,
     // OrderLocationForm,
     ScreenContent,
+    UserDetails,
+    UserList,
     // SubNav,
 }

@@ -1,5 +1,6 @@
 import AppNavigator from './AppNavigator'
 import AuthStackNavigator from './AuthStackNavigator'
+import UsersNavigator from './UsersNavigator'
 // import DrawerNavigator from './DrawerNavigator'
 // import BottomTabNavigator from './BottomTabNavigator'
 // import DashboardNavigator from './DashboardNavigator'
@@ -12,6 +13,7 @@ import AuthStackNavigator from './AuthStackNavigator'
 export {
     AppNavigator,
     AuthStackNavigator,
+    UsersNavigator,
     // DrawerNavigator,
     // BottomTabNavigator,
     // DashboardNavigator,

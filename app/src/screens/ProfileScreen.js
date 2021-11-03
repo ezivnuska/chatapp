@@ -11,16 +11,13 @@ import { StackActions } from '@react-navigation/native'
 import axios from 'axios'
 import globalStore from '../../GlobalStore'
 import { action } from 'mobx'
+import { observer } from 'mobx-react'
 
 import SecureScreen from './SecureScreen'
 
-const ProfileScreen = props => {
+const ProfileScreen = observer(props => {
     const [ isVisible ] = useState(false)
-
-    const resetDrawerNavigator = () => {
-        props.navigation.dispatch(StackActions.popToTop())
-    }
-
+    // console.log('globalStore.user', globalStore.user.username)
     const signout = () => {
         axios
         .post('http://localhost:3000/signout')
@@ -36,15 +33,14 @@ const ProfileScreen = props => {
                     _id: '',
                 })
                 console.log('logged out')
+                
                 props.navigation.navigate('Auth')
             }))
         })
         .catch(err => console.log('logout failed:', err))
     }
-    
+
     const { user } = globalStore
-    
-    console.log('globalStore', globalStore)
 
     return (
         <View style={styles.container}>
@@ -72,7 +68,7 @@ const ProfileScreen = props => {
             
         </View>
     )
-}
+})
 
 export default SecureScreen(ProfileScreen)
 

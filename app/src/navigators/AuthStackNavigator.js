@@ -4,7 +4,7 @@ import {
     SigninScreen,
     SignupScreen,
 } from '../screens'
-import { MaterialIcons } from '@expo/vector-icons'
+// import { MaterialIcons } from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator()
 

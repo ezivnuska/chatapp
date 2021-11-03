@@ -32,13 +32,6 @@ const createToken = (user, secret, expiresIn) => {
     }, secret, { expiresIn })
 }
 
-server.get('/test', (req, res) => {
-    console.log('test endpoint reached')
-    res.json({
-        success: true,
-    })
-})
-
 server.post('/signup', (req, res) => {
     console.log('password', req.body.password)
     bcrypt.hash(req.body.password, 10, (err, hashedPW) => {
@@ -132,7 +125,6 @@ server.post('/authenticate', (req, res) => {
                 .then(result => {
                     req.session.token = createToken(result, SESSION_SECRET, '24hr')
                     req.user = result
-                    console.log('result...', result)
                     // user.password cound not be deleted, change to undefined to hide the password
                     req.user.password = undefined
                     req.user.__v = undefined
@@ -158,6 +150,18 @@ server.post('/signout', (req, res) => {
     res.json({
         success: true,
         msg: 'User Signed Out',
+    })
+})
+
+server.get('/users', (req, res) => {
+    console.log('getting users')
+    Users
+    .find({})
+    .then(result => {
+        console.log('all users', result)
+        res.json({
+            users: result,
+        })
     })
 })
 

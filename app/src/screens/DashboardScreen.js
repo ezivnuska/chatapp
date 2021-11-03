@@ -3,22 +3,58 @@ import {
     Dimensions,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from 'react-native'
+import SecureScreen from './SecureScreen'
+import { MaterialIcons } from '@expo/vector-icons'
 
 const { height } = Dimensions.get('window')
 
-const DashboardScreen = () => (
-    <View style={styles.container}>
-        
-    </View>
-)
+const DashboardScreen = props => {
+    const navigateToUserList = () => props.navigation.navigate('Users')
+    return (
+        <View style={styles.container}>
 
-export default DashboardScreen
+            <TouchableOpacity
+              style={styles.rowContainer}
+              onPress={navigateToUserList}
+            >
+                <Text style={styles.link}>
+                    Users
+                </Text>
+              <View style={styles.right}>
+                  <MaterialIcons
+                    name='keyboard-arrow-right'
+                    size={30}
+                  />
+                </View>
+            </TouchableOpacity>
+            
+        </View>
+    )
+}
+
+export default SecureScreen(DashboardScreen)
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         height: height,
+    },
+    link: {
+        fontSize: 20,
+        marginTop: 3,
+    },
+    rowContainer: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'flex-start',
+      // marginBottom: 10,
+      paddingVertical: 12,
+      paddingHorizontal: 15,
+      // borderStyle: 'solid',
+      // borderBottomWidth: 1,
+      // borderBottomColor: '#aaa',
     },
 })
