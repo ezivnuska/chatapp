@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Dimensions,
     StyleSheet,
@@ -7,12 +7,16 @@ import {
     View,
 } from 'react-native'
 import SecureScreen from './SecureScreen'
+import { ChatForm } from '../components'
 import { MaterialIcons } from '@expo/vector-icons'
 
 const { height } = Dimensions.get('window')
 
 const DashboardScreen = props => {
+    const [ loadClient, setLoadClient ] = useState(true)
+
     const navigateToUserList = () => props.navigation.navigate('Users')
+    
     return (
         <View style={styles.container}>
 
@@ -30,7 +34,16 @@ const DashboardScreen = props => {
                   />
                 </View>
             </TouchableOpacity>
-            
+
+            <TouchableOpacity
+                style={styles.rowContainer}
+                onPress={() => setLoadClient(prevState => !prevState)}
+            >
+                <Text>STOP CLIENT</Text>
+            </TouchableOpacity>
+
+            {loadClient ? <ChatForm /> : null}
+
         </View>
     )
 }

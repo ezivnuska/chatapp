@@ -19,12 +19,14 @@
 // import OrderForm from './OrderForm'
 // import OrderItems from './OrderItems'
 // import OrderLocationForm from './OrderLocationForm'
+import ChatForm from './ChatForm'
 import ScreenContent from './ScreenContent'
 import UserDetails from './UserDetails'
 import UserList from './UserList'
 // import SubNav from './SubNav'
 
 export {
+    ChatForm,
     // Checkbox,
     // CustomDatePicker,
     // DateFilter,

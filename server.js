@@ -11,15 +11,34 @@ const PORT = process.env.PORT || 3000
 
 const Users = require('./models/User')
 
-const server = express()
+const { createServer } = require('http')
+const { Server } = require('socket.io')
+const app = express()
+const server = createServer(app)
+const io = new Server(server, {})
 
-server.use(express.urlencoded({ extended: false }))
-server.use(express.json())
-server.use(cors({
+// const { createSocket } = require('dgram')
+
+io.on('connection', socket => {
+    console.log('\n\nsocket connected successfully')
+    let handshake = socket.handshake
+    console.log('handshake', handshake)
+
+    io.sockets.emit('connected', 'Success')
+
+    socket.on('message', data => {
+        console.log('data', data)
+        io.sockets.emit('message', data)
+    })
+})
+
+app.use(express.urlencoded({ extended: false }))
+app.use(express.json())
+app.use(cors({
     origin: true,
     credentials: true,
 }))
-server.use(session({
+app.use(session({
     secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -32,7 +51,13 @@ const createToken = (user, secret, expiresIn) => {
     }, secret, { expiresIn })
 }
 
-server.post('/signup', (req, res) => {
+app.post('/message', (req, res) => {
+    const { _id, username, message } = req.body
+    console.log('data', _id, username, message)
+    io.sockets.emit('message', { _id, username, message })
+})
+
+app.post('/signup', (req, res) => {
     console.log('password', req.body.password)
     bcrypt.hash(req.body.password, 10, (err, hashedPW) => {
         if (err) {
@@ -75,7 +100,7 @@ server.post('/signup', (req, res) => {
     })
 })
 
-server.post('/signin', (req, res) => {
+app.post('/signin', (req, res) => {
     const { email, password } = req.body
     console.log('signing in with email and password:', email, password)
     Users
@@ -107,7 +132,7 @@ server.post('/signin', (req, res) => {
         .catch(err => res.json({msg: 'Failed to find the user'}))
 })
 
-server.post('/authenticate', (req, res) => {
+app.post('/authenticate', (req, res) => {
     const { body, session } = req
     const { userToken } = body
     const { token } = session
@@ -142,7 +167,7 @@ server.post('/authenticate', (req, res) => {
     //     .catch(err => console.timeLog('Error getting users.', err))
 })
 
-server.post('/signout', (req, res) => {
+app.post('/signout', (req, res) => {
     console.log('signout on server, req.user:', req.user)
     console.log('signout on server, req.session.token:', req.session.token)
     delete req.session.token
@@ -153,7 +178,7 @@ server.post('/signout', (req, res) => {
     })
 })
 
-server.get('/users', (req, res) => {
+app.get('/users', (req, res) => {
     console.log('getting users')
     Users
     .find({})
@@ -172,7 +197,7 @@ mongoose
         useUnifiedTopology: true,
         keepAlive: true,
     })
-    .then(() => console.log('MongoDB connected'))
+    .then(() => console.log('MongoDB connected\n\n\n'))
     .catch(err => console.log('Error connecting to database', err))
 
-server.listen(PORT, () => console.log(`server listen on ${PORT}`))
+server.listen(PORT, () => console.log(`\n\n\nserver listen on ${PORT}\n`))

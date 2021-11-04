@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   StyleSheet,
   View,
@@ -15,6 +15,8 @@ const UserListScreen = observer(({ navigation, route }) => {
   
   const [ users, setUsers ] = useState(route.params.store.users)
   const [ loaded, setLoaded ] = useState(false)
+  const [ loading, setLoading ] = useState(false)
+
 
   const loadUsers = async () => {
     axios
@@ -24,6 +26,7 @@ const UserListScreen = observer(({ navigation, route }) => {
       route.params.store.updateUsers(data.users)
       setUsers(data.users)
       setLoaded(true)
+      setLoading(false)
     }))
     .catch(err => console.log('Error', err))
   }
@@ -32,8 +35,15 @@ const UserListScreen = observer(({ navigation, route }) => {
     const user = users.filter(user => user._id === id)[0]
     route.params.store.setUserDetails(user)
   }
-
-  if (!loaded) loadUsers()
+  
+  useEffect(() => {
+    console.log('effect: loading/loaded', loading, loaded, users.length)
+    if (loading) return
+    if (!loaded) {
+      setLoading(true)
+      loadUsers()
+    }
+  })
   
   return users ? (
     <View style={styles.container}>
