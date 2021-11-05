@@ -10,6 +10,9 @@ const db = require('./config').DB_CONNECTION_STRING
 const PORT = process.env.PORT || 3000
 
 const Users = require('./models/User')
+const Messages = require('./models/Message')
+
+const MessageRouter = require('./routers/Messages')
 
 const { createServer } = require('http')
 const { Server } = require('socket.io')
@@ -20,9 +23,14 @@ const io = new Server(server, {})
 // const { createSocket } = require('dgram')
 
 io.on('connection', socket => {
-    console.log('\n\nsocket connected successfully')
-    let handshake = socket.handshake
-    console.log('handshake', handshake)
+    socket.send('\nsocket connected successfully', socket.id)
+    console.log('\nsocket connected successfully', socket.id)
+    
+    // const srvSockets = io.sockets
+    // console.log(srvSockets)
+
+    // let handshake = socket.handshake
+    // console.log('handshake', handshake)
 
     io.sockets.emit('connected', 'Success')
 
@@ -51,11 +59,45 @@ const createToken = (user, secret, expiresIn) => {
     }, secret, { expiresIn })
 }
 
-app.post('/message', (req, res) => {
-    const { _id, username, message } = req.body
-    console.log('data', _id, username, message)
-    io.sockets.emit('message', { _id, username, message })
-})
+MessageRouter(app, io)
+
+// app.post('/message', (req, res) => {
+//     const { userId, username, body } = req.body
+//     console.log('req.body', userId, username, body)
+//     const newMessage = {
+//         userId,
+//         username,
+//         body,
+//     }
+//     // save to db
+//     Messages
+//     .create(newMessage)
+//     .then(message => {
+//         console.log('message...', message)
+//         if (!message) throw new Error();
+        
+//         io.sockets.emit('message', message)
+//         res.status(200).json({
+//             success: true,
+//             message,
+//         })
+//     })
+//     .catch(err => console.log('Error creating new user.', err))
+
+// })
+
+// app.get('/messages', (req, res) => {
+//     Messages
+//     .find({})
+//     .then(result => {
+//         console.log('result', result)
+//         res.status(200).json({
+//             success: true,
+//             messages: result,
+//         })
+//     })
+//     .catch(err => console.log('error fetching all messages'))
+// })
 
 app.post('/signup', (req, res) => {
     console.log('password', req.body.password)

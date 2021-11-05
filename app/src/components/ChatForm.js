@@ -25,32 +25,27 @@ const ChatForm = props => {
     
     useEffect(() => {
         
-        const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket', 'polling' ] })
-
-        socket.on('message', data => {
-            console.log('message', data)
-            setResponse(data)
-        })
-
-        return () => socket.disconnect()
     }, [])
 
     const send = ({ message }) => {
         console.log('sending message')
         if (!message || !message.length) return
         console.log('message: ', message)
+        const newMessage = {
+            userId: _id,
+            username,
+            body: message,
+        }
 
-        axios.post('http://localhost:3000/message', { _id, username, message })
+        axios.post('http://localhost:3000/message', newMessage)
         .then(result => {
-            console.log('result', result)
+            console.log('new message result', result)
         })
         .catch(err => console.log('could not send chat'))
     }
 
     return (
         <View style={styles.container}>
-            <Text>{response.username ? response.username : null}</Text>
-            <Text>{response.message ? response.message : null}</Text>
             <View style={styles.content}>
 
                 <Text style={styles.label}>Chat</Text>

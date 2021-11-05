@@ -20,6 +20,8 @@
 // import OrderItems from './OrderItems'
 // import OrderLocationForm from './OrderLocationForm'
 import ChatForm from './ChatForm'
+import MessageItem from './MessageItem'
+import MessageList from './MessageList'
 import ScreenContent from './ScreenContent'
 import UserDetails from './UserDetails'
 import UserList from './UserList'
@@ -27,6 +29,11 @@ import UserList from './UserList'
 
 export {
     ChatForm,
+    MessageItem,
+    MessageList,
+    ScreenContent,
+    UserDetails,
+    UserList,
     // Checkbox,
     // CustomDatePicker,
     // DateFilter,
@@ -48,8 +55,5 @@ export {
     // OrderForm,
     // OrderItems,
     // OrderLocationForm,
-    ScreenContent,
-    UserDetails,
-    UserList,
     // SubNav,
 }

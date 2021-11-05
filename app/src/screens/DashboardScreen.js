@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native'
 import SecureScreen from './SecureScreen'
-import { ChatForm } from '../components'
+import { ChatForm, MessageList } from '../components'
 import { MaterialIcons } from '@expo/vector-icons'
 
 const { height } = Dimensions.get('window')
@@ -34,15 +34,8 @@ const DashboardScreen = props => {
                   />
                 </View>
             </TouchableOpacity>
-
-            <TouchableOpacity
-                style={styles.rowContainer}
-                onPress={() => setLoadClient(prevState => !prevState)}
-            >
-                <Text>STOP CLIENT</Text>
-            </TouchableOpacity>
-
-            {loadClient ? <ChatForm /> : null}
+            <MessageList />
+            <ChatForm />
 
         </View>
     )
