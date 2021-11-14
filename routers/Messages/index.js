@@ -11,7 +11,7 @@ const MessageRouter = (app, io) => {
             username,
             body,
         }
-        // save to db
+        
         Messages
         .create(newMessage)
         .then(message => {
@@ -28,10 +28,11 @@ const MessageRouter = (app, io) => {
     })
     
     app.get('/messages', (req, res) => {
+
         Messages
         .find({})
         .then(result => {
-            console.log('result', result)
+            // console.log('result', result)
             res.status(200).json({
                 success: true,
                 messages: result,
@@ -40,14 +41,14 @@ const MessageRouter = (app, io) => {
         .catch(err => console.log('error fetching all messages'))
     })
     
-    app.delete('/messages:id', (req, res) => {
-        
+    app.delete('/messages/:id', (req, res) => {
+        console.log('req.params', req.params)
         const { id } = req.params
-        console.log('deleting driver with id:', id)
+        console.log('deleting message with id:', id)
         
-        Message
+        Messages
         .findOneAndDelete({ _id: id, }, {
-            useFindAndModify: false
+            useFindAndModify: false,
         })
         .then(result => {
             console.log('message deleted', result)

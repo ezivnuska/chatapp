@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     View,
 } from 'react-native'
+import { Button } from './'
 import { MaterialIcons } from '@expo/vector-icons'
 import globalStore from '../../GlobalStore'
 import axios from 'axios'
@@ -16,10 +17,9 @@ const ENDPOINT = 'http://localhost:3000'
 
 const { height } = Dimensions.get('window')
 
-const ChatForm = props => {
-    const [ response, setResponse ] = useState({})
+const ChatForm = () => {
 
-    const { control, handleSubmit, formState: { errors } } = useForm()
+    const { control, handleSubmit, formState: { errors }, reset } = useForm()
 
     const { _id, username } = globalStore.user
     
@@ -41,7 +41,7 @@ const ChatForm = props => {
         .then(result => {
             console.log('new message result', result)
         })
-        .catch(err => console.log('could not send chat'))
+        .catch(err => console.log('could not send message'))
     }
 
     return (
@@ -52,7 +52,7 @@ const ChatForm = props => {
                 <Controller
                     control={control}
                     rules={{
-                    required: true,
+                        required: true,
                     }}
                     render={({ field: { onChange, onBlur, value }}) => (
                         <TextInput
@@ -68,16 +68,10 @@ const ChatForm = props => {
                     defaultValue=''
                 />
 
-                <TouchableOpacity
-                    style={styles.button}
+                <Button
+                    label='Send'
                     onPress={handleSubmit(send)}
-                >
-                    <Text
-                    style={styles.buttonLabel}
-                    accessibilityLabel='Sign In'>
-                        Send
-                    </Text>
-                </TouchableOpacity>
+                />
                 
             </View>
         </View>
@@ -88,8 +82,10 @@ export default ChatForm
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        height: height,
+        // flex: 1,
+        // height: height,
+        borderWidth: 1,
+        flexGrow: 1,
     },
     content: {
         padding: 20,
@@ -99,7 +95,7 @@ const styles = StyleSheet.create({
         marginTop: 3,
     },
     rowContainer: {
-      flex: 1,
+    //   flex: 1,
       flexDirection: 'row',
       justifyContent: 'flex-start',
       // marginBottom: 10,
@@ -124,22 +120,22 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#ccc',
     },
-  button: {
-    // flex: 1,
-    height: 40,
-    backgroundColor: '#F08E52',
-    borderRadius: 10,
-    shadowColor: '#2F1A0C',
-    shadowOffset: {width: 1, height: 1},
-    shadowOpacity: 0.5,
-    shadowRadius: 3,
-    marginVertical: 10,
-    // marginHorizontal: 5,
-  },
-  buttonLabel: {
-    color: '#000',
-    fontSize: 20,
-    marginTop: 7,
-    textAlign: 'center',
-  },
+    button: {
+        // flex: 1,
+        height: 40,
+        backgroundColor: '#F08E52',
+        borderRadius: 10,
+        shadowColor: '#2F1A0C',
+        shadowOffset: {width: 1, height: 1},
+        shadowOpacity: 0.5,
+        shadowRadius: 3,
+        marginVertical: 10,
+        // marginHorizontal: 5,
+    },
+    buttonLabel: {
+        color: '#000',
+        fontSize: 20,
+        marginTop: 7,
+        textAlign: 'center',
+    },
 })

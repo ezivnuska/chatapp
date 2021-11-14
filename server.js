@@ -13,6 +13,7 @@ const Users = require('./models/User')
 const Messages = require('./models/Message')
 
 const MessageRouter = require('./routers/Messages')
+const SocketRouter = require('./routers/Sockets')
 
 const { createServer } = require('http')
 const { Server } = require('socket.io')
@@ -21,24 +22,6 @@ const server = createServer(app)
 const io = new Server(server, {})
 
 // const { createSocket } = require('dgram')
-
-io.on('connection', socket => {
-    socket.send('\nsocket connected successfully', socket.id)
-    console.log('\nsocket connected successfully', socket.id)
-    
-    // const srvSockets = io.sockets
-    // console.log(srvSockets)
-
-    // let handshake = socket.handshake
-    // console.log('handshake', handshake)
-
-    io.sockets.emit('connected', 'Success')
-
-    socket.on('message', data => {
-        console.log('data', data)
-        io.sockets.emit('message', data)
-    })
-})
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -60,6 +43,62 @@ const createToken = (user, secret, expiresIn) => {
 }
 
 MessageRouter(app, io)
+SocketRouter(app, io)
+
+io.on('connection', socket => {
+    // socket.send('\nsocket connected successfully', socket.id)
+    // console.log('\nsocket connected successfully', socket.id)
+    // console.log('\nsocket rooms', socket.rooms)
+
+    io.sockets.emit('connected', 'Success')
+    const clients = io.sockets
+    clients.sockets.forEach(( data, counter ) => {
+
+        // console.log(data)//maps
+        
+        var socketid =  data.id//log ids
+        var isConnected = data.connected//true,false;
+        // console.log('socketid', socketid)
+    })
+
+    socket.on('join room', roomId => {
+        console.log('joining room', roomId)
+        socket.join(roomId)
+        console.log('socket.roms', socket.rooms)
+        io.sockets.emit('connection')
+    })
+
+    socket.on('message', data => {
+        console.log('data', data)
+        io.sockets.emit('message', data)
+    })
+
+    socket.on('create', room => {
+        console.log('room created', room)
+        console.log('joining room', room)
+
+        socket.join(room)
+        const rooms = getActiveRooms(io)
+        console.log('***', rooms)
+    })
+
+    socket.on('disconnect', () => {
+        io.sockets.emit('change')
+    })
+})
+
+const getActiveRooms = (io) => {
+    // Convert map into 2D list:
+    // ==> [['4ziBKG9XFS06NdtVAAAH', Set(1)], ['room1', Set(2)], ...]
+    const arr = Array.from(io.sockets.adapter.rooms)
+    // Filter rooms whose name exist in set:
+    // ==> [['room1', Set(2)], ['room2', Set(2)]]
+    const filtered = arr.filter(room => !room[1].has(room[0]))
+    // Return only the room name: 
+    // ==> ['room1', 'room2']
+    const res = filtered.map(i => i[0])
+    return res
+}
 
 // app.post('/message', (req, res) => {
 //     const { userId, username, body } = req.body

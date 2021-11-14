@@ -19,19 +19,31 @@
 // import OrderForm from './OrderForm'
 // import OrderItems from './OrderItems'
 // import OrderLocationForm from './OrderLocationForm'
+import Button from './Button'
 import ChatForm from './ChatForm'
+import ChatModule from './ChatModule'
+import FlexContainer from './FlexContainer'
 import MessageItem from './MessageItem'
 import MessageList from './MessageList'
+import Room from './Room'
+import RoomList from './RoomList'
 import ScreenContent from './ScreenContent'
+import StyledView from './StyledView'
 import UserDetails from './UserDetails'
 import UserList from './UserList'
 // import SubNav from './SubNav'
 
 export {
+    Button,
     ChatForm,
+    ChatModule,
+    FlexContainer,
     MessageItem,
     MessageList,
+    Room,
+    RoomList,
     ScreenContent,
+    StyledView,
     UserDetails,
     UserList,
     // Checkbox,

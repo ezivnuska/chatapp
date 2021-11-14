@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Dimensions,
     StyleSheet,
@@ -7,7 +7,7 @@ import {
     View,
 } from 'react-native'
 import SecureScreen from './SecureScreen'
-import { ChatForm, MessageList } from '../components'
+import { ChatModule, RoomList } from '../components'
 import { MaterialIcons } from '@expo/vector-icons'
 
 const { height } = Dimensions.get('window')
@@ -16,7 +16,7 @@ const DashboardScreen = props => {
     const [ loadClient, setLoadClient ] = useState(true)
 
     const navigateToUserList = () => props.navigation.navigate('Users')
-    
+
     return (
         <View style={styles.container}>
 
@@ -27,15 +27,15 @@ const DashboardScreen = props => {
                 <Text style={styles.link}>
                     Users
                 </Text>
-              <View style={styles.right}>
-                  <MaterialIcons
-                    name='keyboard-arrow-right'
-                    size={30}
-                  />
+                <View style={styles.right}>
+                    <MaterialIcons
+                        name='keyboard-arrow-right'
+                        size={30}
+                    />
                 </View>
             </TouchableOpacity>
-            <MessageList />
-            <ChatForm />
+            <RoomList />
+            <ChatModule />
 
         </View>
     )
@@ -46,6 +46,7 @@ export default SecureScreen(DashboardScreen)
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        flexDirection: 'column',
         height: height,
     },
     link: {

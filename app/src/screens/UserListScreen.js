@@ -37,7 +37,6 @@ const UserListScreen = observer(({ navigation, route }) => {
   }
   
   useEffect(() => {
-    console.log('effect: loading/loaded', loading, loaded, users.length)
     if (loading) return
     if (!loaded) {
       setLoading(true)
