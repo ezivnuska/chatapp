@@ -52,7 +52,6 @@ const MessageList = props => {
   const connect = () => {
     if (socketId) return
     socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
-    console.log('SOCKET CONNECTED', socket)
     socket.on('connect', () => {
       console.log('MessageList connected')
       console.log('MessageList socket', socket)

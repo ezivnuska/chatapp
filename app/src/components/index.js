@@ -28,6 +28,8 @@ import MessageList from './MessageList'
 import Room from './Room'
 import RoomList from './RoomList'
 import ScreenContent from './ScreenContent'
+import SignoutButton from './SignoutButton'
+import SocketInfo from './SocketInfo'
 import StyledView from './StyledView'
 import UserDetails from './UserDetails'
 import UserList from './UserList'
@@ -43,6 +45,8 @@ export {
     Room,
     RoomList,
     ScreenContent,
+    SignoutButton,
+    SocketInfo,
     StyledView,
     UserDetails,
     UserList,

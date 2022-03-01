@@ -4,6 +4,7 @@ import SigninScreen from './SigninScreen'
 import SignupScreen from './SignupScreen'
 // import WelcomeScreen from './WelcomeScreen'
 import AuthLoadingScreen from './AuthLoadingScreen'
+import ChatScreen from './ChatScreen'
 import DashboardScreen from './DashboardScreen'
 // import FluffyScreen from './FluffyScreen'
 // import NewLocationScreen from './NewLocationScreen'
@@ -23,6 +24,7 @@ import ProfileScreen from './ProfileScreen'
 // import DriversScreen from './DriversScreen'
 // import DriverEditorScreen from './DriverEditorScreen'
 // import DriverDetailsScreen from './DriverDetailsScreen'
+import ScaleScreen from './ScaleScreen'
 import SecureScreen from './SecureScreen'
 // import VendorsScreen from './VendorsScreen'
 // import VendorEditorScreen from './VendorEditorScreen'
@@ -35,6 +37,7 @@ import UserDetailsScreen from './UserDetailsScreen'
 export {
     AuthLoadingScreen,
     // HomeScreen,
+    ChatScreen,
     DashboardScreen,
     // MapScreen,
     SigninScreen,
@@ -61,6 +64,7 @@ export {
     // DriversScreen,
     // DriverDetailsScreen,
     // DriverEditorScreen,
+    ScaleScreen,
     SecureScreen,
     // VendorsScreen,
     // VendorDetailsScreen,

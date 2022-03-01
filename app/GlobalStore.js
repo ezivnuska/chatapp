@@ -12,6 +12,7 @@ class GlobalStore {
     users = []
     user = null
     userDetails = null
+    socket = null
 
     updateUser = updated => {
         this.user = updated
@@ -28,6 +29,12 @@ class GlobalStore {
         this.userDetails = user
     }
 
+    setSocket = updated => {
+        if (this.socket) console.log('updating socket', this.socket.id, updated.id)
+        this.socket = updated
+        console.log('socket updated', this.socket.id)
+    }
+
 
 
     // updateAddress = address => this.user.address = Object.assign({}, address);
@@ -40,6 +47,8 @@ class GlobalStore {
             updateUsers: action,
             userDetails: observable,
             setUserDetails: action,
+            socket: observable,
+            setSocket: action,
         })
     }
 
@@ -172,6 +181,6 @@ class GlobalStore {
 //         // clearVendor: action,
 //         // deleteVendor: action,
 //     }
-// )
 
+// )
 export default new GlobalStore()

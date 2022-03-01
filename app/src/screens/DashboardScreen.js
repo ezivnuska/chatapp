@@ -7,7 +7,10 @@ import {
     View,
 } from 'react-native'
 import SecureScreen from './SecureScreen'
-import { ChatModule, RoomList } from '../components'
+import {
+    ChatModule,
+    RoomList
+} from '../components'
 import { MaterialIcons } from '@expo/vector-icons'
 
 const { height } = Dimensions.get('window')
@@ -16,6 +19,7 @@ const DashboardScreen = props => {
     const [ loadClient, setLoadClient ] = useState(true)
 
     const navigateToUserList = () => props.navigation.navigate('Users')
+    const navigateToChat = () => props.navigation.navigate('Chat')
 
     return (
         <View style={styles.container}>
@@ -34,8 +38,22 @@ const DashboardScreen = props => {
                     />
                 </View>
             </TouchableOpacity>
-            <RoomList />
-            <ChatModule />
+            <TouchableOpacity
+                style={styles.rowContainer}
+                onPress={navigateToChat}
+            >
+                <Text style={styles.link}>
+                    Chat
+                </Text>
+                <View style={styles.right}>
+                    <MaterialIcons
+                        name='keyboard-arrow-right'
+                        size={30}
+                    />
+                </View>
+            </TouchableOpacity>
+            {/* <RoomList />
+            <ChatModule /> */}
 
         </View>
     )

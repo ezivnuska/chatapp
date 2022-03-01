@@ -34,6 +34,12 @@ const UserSchema = new Schema({
     joinDate: {
         type: Date,
         default: Date.now(),
+    },
+    connected: {
+        type: Boolean,
+    },
+    token: {
+        type: String,
     }
 })
 

@@ -21,90 +21,101 @@ import socketIoClient from 'socket.io-client'
 const ENDPOINT = 'http://localhost:3000'
 
 const RoomList = props => {
+  console.log('*', props)
   const [ loaded, setLoaded ] = useState(false)
   const [ loading, setLoading ] = useState(false)
-  const [ rooms, setRooms ] = useState([])
 
-  const loadRooms = () => {
-    setLoading(true)
-    axios.get('http://localhost:3000/sockets')
-    .then(({ data }) => {
-      console.log('result from socket fetch', data.sockets)
-      setRooms(data.sockets)
-      setLoaded(true)
-      setLoading(false)
-    })
-    .catch(err => console.log('Error fetching sockets', err))
+  // const loadRooms = () => {
+  //   setLoading(true)
+  //   axios.get('http://localhost:3000/sockets')
+  //     .then(({ data }) => {
+  //       console.log('result from socket fetch', data.sockets)
+  //       setRooms(data.sockets)
+  //       setLoaded(true)
+  //       setLoading(false)
+  //     })
+  //     .catch(err => console.log('Error fetching sockets', err))
+  // }
+
+  const joinRoom = roomName => {
+    const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
+    const socketId = socket.id
+    console.log('\nattempting to join room', roomName)
+    const username = globalStore.user.username
+    console.log('room name-----', username)
+    socket.emit('join', username)
+    // axios
+    // .put(`http://localhost:3000/sockets/join/${socketId}`, { userId })
+    // .then(result => {
+    //   console.log('join result', result)
+    // })
+    // .catch(err => console.log('error putting', err))
   }
 
-  const signout = () => {
-    axios
-    .post('http://localhost:3000/signout')
-    .then(({ data }) => {
-        if (!data.success) throw new Error('Error signing out')
+  // const leaveRoom = socketId => {
+  //   const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
+  //   console.log('\nattempting to leve room', socket)
+  //   const userId = globalStore.user._id
+  //   axios
+  //   .put(`http://localhost:3000/sockets/join/${socketId}`, { userId })
+  //   .then(result => {
+  //     console.log('leave result', result)
+  //   })
+  //   .catch(err => console.log('error putting', err))
+  // }
 
-        AsyncStorage.removeItem('userToken', err => console.log(err ? `Error clearing AsyncStorage, ${err}` : 'AsyncStorage cleared'))
-        .then(action(() => {
-            globalStore.updateUser({
-                username: '',
-                email: '',
-                thumbnail: '',
-                _id: '',
-            })
-            console.log('logged out')
-            
-            props.navigation.navigate('Auth')
-        }))
-    })
-    .catch(err => console.log('logout failed:', err))
-}
+  const deleteRoom = socketId => {
+    // console.log('deleting room with socketId:', socketId)
+    // axios
+    // .delete(`http://localhost:3000/sockets/${socketId}`)
+    // .then(result => {
+    //     console.log('delete result:', result)
+    //   })
+    //   .catch(err => console.log('Error:', err))
+  }
 
-const joinRoom = roomId => {
-  const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
-  console.log('attempting to join room', roomId, socket)
-  axios
-  .put('http://localhost:3000/sockets', { roomId })
-  .then(result => {
-    console.log('put result', result)
-  })
-  .catch(err => console.log('error putting', err))
-} 
+  // const connectSocket = () => {
+  //   const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
+
+
+  //   socket.on('connect', rooms => {
+  //     console.log('RoomList connected', rooms)
+  //     setRooms(rooms)
+  //     const { username } = globalStore.user
+  //     console.log('current user', username)
+  //     // socket.emit('create', username)  
+
+  //     // if (!loading && !loaded) {
+  //     //   loadRooms()
+  //     // }
+  //   })
+
+  //   socket.on('new socket', sock => {
+  //     console.log('ROOMLIST: new socket', sock)
+  //     // loadRooms()
+  //   })
+
+  //   socket.on('disconnect', data => {
+  //     console.log('ROOMLIST: disconnecting', data)
+  //   })
+
+  //   socket.on('change', data => {
+  //     console.log('ROOMLIST: change', data)
+  //     // loadRooms()
+  //   })
+
+  //   globalStore.setSocket(socket)
+  //   console.log('ROOMLIST', globalStore.socket)
+  // }
+
+  // const disconnectSocket = () => {
+  //   const socket = globalStore.socket
+  //   console.log('RoomList disconnecting socket', socket)
+  //   socket.disconnect()
+  // }
 
   useEffect(() => {
-    
-    const socket = socketIoClient(ENDPOINT, { transports: [ 'websocket' ] })
-    console.log('ROOMLIST', socket)
-    socket.on('connect', () => {
-      console.log('RoomList connected')
-
-      const { username } = globalStore.user
-      console.log('current user', username)
-      // socket.emit('create', username)  
-
-      if (!loading && !loaded) {
-        loadRooms()
-      }
-
-      socket.on('new socket', sock => {
-        console.log('sock', sock)
-        loadRooms()
-      })
-
-      socket.on('disconnect', () => {
-        console.log('disconnecting')
-      })
-
-      socket.on('change', () => {
-        console.log('disconnected')
-        loadRooms()
-      })
-      
-    })
-
-    // return () => {
-    //   console.log('RoomList disconnecting in useEffect', socket)
-    //   socket.disconnect()
-    // }
+    console.log('rooms-->', props.rooms)
   }, [])
 
   return (
@@ -112,10 +123,15 @@ const joinRoom = roomId => {
       <StyledView>
         <Text style={styles.heading}>Rooms</Text>
         <FlatList
-          data={rooms}
+          data={props.rooms}
           keyExtractor={(item, index) => 'roomKey' + index}
           renderItem={({ item }) => (
-            <Room room={item} join={joinRoom} />
+            <Room
+              room={item}
+              joinRoom={joinRoom}
+              deleteRoom={deleteRoom}
+
+            />
           )}
         />
       </StyledView>

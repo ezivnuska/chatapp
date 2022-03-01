@@ -8,25 +8,67 @@ import {
 import globalStore from '../../GlobalStore.js'
 import { StyledView } from './'
 
-const Room = ({ join, room }) => {
-
-    const handlePress = () => {
-        console.log('pressed to connect', room)
+const Room = ({ deleteRoom, joinRoom, room }) => {
+    console.log('room', room)
+    const handleJoin = () => {
+        console.log('pressed to join', room.username)
         if (isUserRoom()) return
         console.log('not users room, joining...')
-        join(room._id)
+        joinRoom(room.socketId)
     }
 
-    const isUserRoom = () => globalStore.user._id === room.userId
+    const handleLeave =() => {
+        console.log('pressed to delete', room.socketId)
+        deleteRoom(room.socketId)
+    }
+    
+    const handleDelete =() => {
+        console.log('pressed to delete', room.socketId)
+        deleteRoom(room.socketId)
+    }
 
+    const isUserRoom = () => globalStore.user.username === room.username
+    const isConnectedUser = () => globalStore.user._id === room.connectedUserId
+    const isRoomOccupied = () => room.connectedUserId != null
     return (
         <StyledView>
-            <TouchableOpacity
+            <View
                 style={styles.content}
-                onPress={handlePress}
             >
                 <Text>{room.username}</Text>
-            </TouchableOpacity>
+                <Text>{room.socketId}</Text>
+                {/* <Text>socketId: {room.socketId}</Text>
+                <Text>userId: {room.userId}</Text>
+                <Text>room occupied: {isRoomOccupied() ? 'True' : 'False'}</Text>
+                {room.connectedUserId && <Text>ConnectedUserId: {room.connectedUserId}</Text>} */}
+            </View>
+
+            {(!isConnectedUser() && !isRoomOccupied()) ? (
+                <TouchableOpacity
+                    style={styles.content}
+                    onPress={handleJoin}
+                >
+                    <Text>Join</Text>
+                </TouchableOpacity>
+            ) : (
+                <TouchableOpacity
+                    style={styles.content}
+                    onPress={handleLeave}
+                >
+                    <Text>Leave</Text>
+                </TouchableOpacity>
+            )}
+
+            {isUserRoom() && (
+                <TouchableOpacity
+                    style={styles.content}
+                    onPress={handleDelete}
+                >
+                    <Text>Delete</Text>
+                </TouchableOpacity>
+            )}
+
+            
         </StyledView>
     )
 }

@@ -6,14 +6,18 @@ import UsersNavigator from './UsersNavigator'
 // import LocationStackNavigator from './LocationStackNavigator'
 // import VendorStackNavigator from './VendorStackNavigator'
 import {
+  ChatScreen,
   DashboardScreen,
   // HomeScreen,
   // MapScreen,
+  ScaleScreen,
   ProfileScreen,
   UserListScreen,
   UserDetailsScreen,
 } from '../screens'
-// import { HeaderAddButton, HeaderBackButton } from '../components/presentations'
+import {
+  SignoutButton,
+} from '../components'
 import { EvilIcons, MaterialIcons } from '@expo/vector-icons'
 
 const Stack = createNativeStackNavigator()
@@ -30,6 +34,16 @@ const AppNavigator = () => {
       <Stack.Screen
           name='Dashboard'
           component={DashboardScreen}
+          options={({ navigation, route }) => ({
+              // headerTitle: 'Dashboard',
+              headerRight: () => (
+                  <SignoutButton navigation={navigation} />
+              ),
+          })}
+      />
+      <Stack.Screen
+          name='Chat'
+          component={ChatScreen}
           // options={({ navigation, route }) => ({
           //     // headerTitle: 'Dashboard',
           //     headerRight: () => (
@@ -45,6 +59,10 @@ const AppNavigator = () => {
       <Stack.Screen
         name='Profile'
         component={ProfileScreen}
+      />
+        <Stack.Screen
+          name='Scale'
+          component={ScaleScreen}
         />
       <Stack.Screen
         name='Users'
