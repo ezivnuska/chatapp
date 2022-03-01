@@ -6,6 +6,7 @@ import SignupScreen from './SignupScreen'
 import AuthLoadingScreen from './AuthLoadingScreen'
 import ChatScreen from './ChatScreen'
 import DashboardScreen from './DashboardScreen'
+import FlexScreen from './FlexScreen'
 // import FluffyScreen from './FluffyScreen'
 // import NewLocationScreen from './NewLocationScreen'
 // import LocationsScreen from './LocationsScreen'
@@ -39,6 +40,7 @@ export {
     // HomeScreen,
     ChatScreen,
     DashboardScreen,
+    FlexScreen,
     // MapScreen,
     SigninScreen,
     SignupScreen,

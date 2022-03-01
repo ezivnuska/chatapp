@@ -8,6 +8,7 @@ import UsersNavigator from './UsersNavigator'
 import {
   ChatScreen,
   DashboardScreen,
+  FlexScreen,
   // HomeScreen,
   // MapScreen,
   ScaleScreen,
@@ -59,6 +60,10 @@ const AppNavigator = () => {
       <Stack.Screen
         name='Profile'
         component={ProfileScreen}
+      />
+      <Stack.Screen
+        name='Flex'
+        component={FlexScreen}
       />
         <Stack.Screen
           name='Scale'

@@ -20,6 +20,7 @@ const DashboardScreen = props => {
 
     const navigateToUserList = () => props.navigation.navigate('Users')
     const navigateToChat = () => props.navigation.navigate('Chat')
+    const navigateToFlex = () => props.navigation.navigate('Flex')
 
     return (
         <View style={styles.container}>
@@ -44,6 +45,20 @@ const DashboardScreen = props => {
             >
                 <Text style={styles.link}>
                     Chat
+                </Text>
+                <View style={styles.right}>
+                    <MaterialIcons
+                        name='keyboard-arrow-right'
+                        size={30}
+                    />
+                </View>
+            </TouchableOpacity>
+            <TouchableOpacity
+                style={styles.rowContainer}
+                onPress={navigateToFlex}
+            >
+                <Text style={styles.link}>
+                    Flex
                 </Text>
                 <View style={styles.right}>
                     <MaterialIcons
