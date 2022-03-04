@@ -26,7 +26,7 @@ const Stack = createNativeStackNavigator()
 const AppNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Dashboard'
+      initialRouteName='Flex'
       // screenOptions={({ navigation, route }) => ({
       //   headerShown: true,
       //   headerTransparent: true,
