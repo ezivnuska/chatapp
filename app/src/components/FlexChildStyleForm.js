@@ -42,13 +42,6 @@ const FlexChildStyleForm = ({ flexGrow, flexShrink, flexBasis, alignSelf, setFle
 
     return (
         <View style={styles.itemStyles}>
-
-            <View style={styles.styleStatus}>
-                <Text>flex-grow: {flexGrow}</Text>
-                <Text>flex-shrink: {flexShrink}</Text>
-                <Text>flex-basis: {flexBasis}</Text>
-                <Text>align-self: {alignSelf}</Text>
-            </View>
             
             <View style={styles.styleControls}>
                 
@@ -97,7 +90,7 @@ const FlexChildStyleForm = ({ flexGrow, flexShrink, flexBasis, alignSelf, setFle
                 </View>
                 
                 <View>
-                    <Text>align-self</Text>
+                    <Text style={styles.controlLabel}>align-self</Text>
                     <RadioButtons
                         // name='align-self'
                         selected={alignSelf}
@@ -114,47 +107,43 @@ export default FlexChildStyleForm
 
 const styles = StyleSheet.create({
     itemStyles: {
+        // display: 'flex',
+        // flexFlow: 'column wrap',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // alignContent: 'center',
+        // textAlign: 'center',
+    },
+    styleControls: {
+        // flex: '1 0 auto',
+        padding: '0.5rem',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#f00',
         display: 'flex',
         flexFlow: 'column wrap',
         justifyContent: 'flex-start',
-        alignItems: 'space-between',
-    },
-    styleStatus: {
-        flex: '1 0 auto',
-        padding: '0.5rem',
-        marginBottom: '0.5rem',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#f00',
-    },
-    styleControls: {
-        flex: '1 0 auto',
-        padding: '0.5rem',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#f00',
-        display: 'flex',
-        flexFlow: 'column nowrap',
-        justifyContent: 'space-between',
+        alignItems: 'stretch',
+        alignContent: 'center',
+        // maxWidth: '300px',
+        textAlign: 'left',
     },
     textInputContainer: {
-        flex: '0 0 auto',
+        flex: '1 0 auto',
         display: 'flex',
         flexFlow: 'row wrap',
         justifyContent: 'space-between',
         alignItems: 'space-between',
-        paddingHorizontal: '0.5rem',
+        // paddingHorizontal: '0.5rem',
         paddingBottom: '1rem',
         marginBottom: '0.5rem',
         textAlign: 'left',
-        // borderWidth: 1,
-        // borderStyle: 'solid',
-        // borderColor: '#00f',
         height: '30px',
+        gap: 10,
     },
     textInputLabel: {
         flex: '0 0 auto',
-        paddingRight: 10,
+        fontWeight: 700,
         lineHeight: 30,
         height: 30,
     },
@@ -165,6 +154,14 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         width: 50,
         height: 30,
-        alignItems: 'stretch',
+        alignSelf: 'flex-end',
+        borderWidth: 1,
+        borderStyle: 'solid',
+        borderColor: '#000',
+    },
+    controlLabel: {
+        fontWeight: 700,
+        lineHeight: 30,
+        height: 30,
     },
 })

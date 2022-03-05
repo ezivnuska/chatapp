@@ -99,7 +99,7 @@ const FlexParent = props => {
                     <View style={styles.controls}>
 
                         <View>
-                            <Text>flex-direction</Text>
+                            <Text style={styles.controlLabel}>flex-direction</Text>
                             <RadioButtons
                                 name='flex-direction'
                                 selected={flexDirection}
@@ -108,7 +108,7 @@ const FlexParent = props => {
                             />
                         </View>
                         <View>
-                            <Text>flex-wrap</Text>
+                            <Text style={styles.controlLabel}>flex-wrap</Text>
                             <RadioButtons
                                 name='flex-wrap'
                                 selected={flexWrap}
@@ -117,7 +117,7 @@ const FlexParent = props => {
                             />
                         </View>
                         <View>
-                            <Text>justify-content</Text>
+                            <Text style={styles.controlLabel}>justify-content</Text>
                             <RadioButtons
                                 name='justify-content'
                                 selected={justifyContent}
@@ -126,7 +126,7 @@ const FlexParent = props => {
                             />
                         </View>
                         <View>
-                            <Text>align-content</Text>
+                            <Text style={styles.controlLabel}>align-content</Text>
                             <RadioButtons
                                 name='align-content'
                                 selected={alignContent}
@@ -135,7 +135,7 @@ const FlexParent = props => {
                             />
                         </View>
                         <View>
-                            <Text>align-items</Text>
+                            <Text style={styles.controlLabel}>align-items</Text>
                             <RadioButtons
                                 name='align-items'
                                 selected={alignItems}
@@ -156,44 +156,53 @@ export default FlexParent
 const styles = StyleSheet.create({
     container: {
         //height - 50,
-        backgroundColor: 'purple',
+        backgroundColor: '#222',
         padding: '0.5rem',
     },
     columns: {
         display: 'flex',
-        flexFlow: 'row wrap',
+        flexFlow: 'row nowrap',
         justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        alignItems: 'stretch',
+        gap: '0.5rem',
     },
     firstColumn: {
         flexGrow: 3,
         flexShrink: 0,
         flexBasis: 'auto',
+        // alignSelf: 'stretch',
     },
     display: {
         display: 'flex',
         borderWidth: 1,
         borderColor: '#f00',
         borderStyle: 'dotted',
-        backgroundColor: '#fff',
+        backgroundColor: '#fdd',
+        padding: '0.5rem',
         // height: 500,
         overflow: 'auto',
+        maxHeight: '700px',
     },
     secondColumn: {
         flex: '1 0 auto',
+        alignSelf: 'stretch',
     },
     status: {
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        justifyContent: 'space-evenly',
+        // alignItems: 'flex-start',
+        backgroundColor: '#000',
     },
     statusText: {
         flex: '1 0 auto',
-        padding: '0.5rem',
-        fontWeight: 500,
+        // padding: '0.5rem',
+        fontWeight: 700,
+        lineHeight: 30,
+        height: 37,
         color: '#fff',
+        textAlign: 'center',
     },
     controls: {
         flex: '1 0 auto',
@@ -201,9 +210,15 @@ const styles = StyleSheet.create({
         flexFlow: 'column wrap',
         height: 500,
         padding: '0.5rem',
-        borderWidth: 1,
-        borderStyle: 'solid',
-        borderColor: '#f00',
+        // borderWidth: 1,
+        // borderStyle: 'solid',
+        // borderColor: '#f00',
         backgroundColor: '#fff',
+    },
+    controlLabel: {
+        fontWeight: 700,
+        lineHeight: 30,
+        height: 20,
+        marginBottom: '0.5rem',
     },
 })
