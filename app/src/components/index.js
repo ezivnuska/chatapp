@@ -23,6 +23,9 @@ import Button from './Button'
 import ChatForm from './ChatForm'
 import ChatModule from './ChatModule'
 import FlexContainer from './FlexContainer'
+import FlexParent from './FlexParent'
+import FlexChild from './FlexChild'
+import FlexChildStyleForm from './FlexChildStyleForm'
 import MessageItem from './MessageItem'
 import MessageList from './MessageList'
 import Room from './Room'
@@ -41,6 +44,9 @@ export {
     ChatForm,
     ChatModule,
     FlexContainer,
+    FlexParent,
+    FlexChild,
+    FlexChildStyleForm,
     MessageItem,
     MessageList,
     Room,
