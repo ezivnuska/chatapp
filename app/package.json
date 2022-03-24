@@ -26,11 +26,13 @@
     "react-dom": "17.0.1",
     "react-hook-form": "^7.18.0",
     "react-native": "0.64.2",
+    "react-native-canvas": "^0.1.38",
     "react-native-gesture-handler": "~1.10.2",
     "react-native-reanimated": "~2.2.0",
     "react-native-safe-area-context": "3.3.2",
     "react-native-screens": "~3.8.0",
     "react-native-web": "0.17.1",
+    "react-native-webview": "^11.17.2",
     "react-navigation-stack": "^2.10.4",
     "socket.io-client": "^4.3.2"
   },

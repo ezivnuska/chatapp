@@ -6,8 +6,10 @@ import UsersNavigator from './UsersNavigator'
 // import LocationStackNavigator from './LocationStackNavigator'
 // import VendorStackNavigator from './VendorStackNavigator'
 import {
+  CanvasScreen,
   ChatScreen,
   DashboardScreen,
+  ExampleScreen,
   FlexScreen,
   // HomeScreen,
   // MapScreen,
@@ -26,7 +28,7 @@ const Stack = createNativeStackNavigator()
 const AppNavigator = () => {
   return (
     <Stack.Navigator
-      initialRouteName='Flex'
+      initialRouteName='Dashboard'
       // screenOptions={({ navigation, route }) => ({
       //   headerShown: true,
       //   headerTransparent: true,
@@ -62,13 +64,21 @@ const AppNavigator = () => {
         component={ProfileScreen}
       />
       <Stack.Screen
+        name='Canvas'
+        component={CanvasScreen}
+      />
+      <Stack.Screen
+        name='Example'
+        component={ExampleScreen}
+      />
+      <Stack.Screen
         name='Flex'
         component={FlexScreen}
       />
-        <Stack.Screen
-          name='Scale'
-          component={ScaleScreen}
-        />
+      <Stack.Screen
+        name='Scale'
+        component={ScaleScreen}
+      />
       <Stack.Screen
         name='Users'
         component={UsersNavigator}
@@ -83,7 +93,7 @@ const AppNavigator = () => {
             />
           )
         })}
-        />
+      />
     </Stack.Navigator>
   )
 }

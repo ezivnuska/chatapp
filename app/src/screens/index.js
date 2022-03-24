@@ -4,8 +4,10 @@ import SigninScreen from './SigninScreen'
 import SignupScreen from './SignupScreen'
 // import WelcomeScreen from './WelcomeScreen'
 import AuthLoadingScreen from './AuthLoadingScreen'
+import CanvasScreen from './CanvasScreen'
 import ChatScreen from './ChatScreen'
 import DashboardScreen from './DashboardScreen'
+import ExampleScreen from './ExampleScreen'
 import FlexScreen from './FlexScreen'
 // import FluffyScreen from './FluffyScreen'
 // import NewLocationScreen from './NewLocationScreen'
@@ -38,8 +40,10 @@ import UserDetailsScreen from './UserDetailsScreen'
 export {
     AuthLoadingScreen,
     // HomeScreen,
+    CanvasScreen,
     ChatScreen,
     DashboardScreen,
+    ExampleScreen,
     FlexScreen,
     // MapScreen,
     SigninScreen,

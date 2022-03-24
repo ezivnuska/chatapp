@@ -19,6 +19,7 @@
 // import OrderForm from './OrderForm'
 // import OrderItems from './OrderItems'
 // import OrderLocationForm from './OrderLocationForm'
+import ArtBoard from './ArtBoard'
 import Button from './Button'
 import ChatForm from './ChatForm'
 import ChatModule from './ChatModule'
@@ -34,13 +35,14 @@ import ScreenContent from './ScreenContent'
 import SignoutButton from './SignoutButton'
 import SocketInfo from './SocketInfo'
 import StyledView from './StyledView'
+import Timer from './Timer'
 import UserDetails from './UserDetails'
 import UserList from './UserList'
 import RadioButtons from './RadioButtons'
 // import SubNav from './SubNav'
-
 export {
     Button,
+    ArtBoard,
     ChatForm,
     ChatModule,
     FlexContainer,
@@ -55,6 +57,7 @@ export {
     SignoutButton,
     SocketInfo,
     StyledView,
+    Timer,
     UserDetails,
     UserList,
     RadioButtons,
